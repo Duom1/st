@@ -6,12 +6,6 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Liberation Mono:pixelsize=20:antialias=true:autohint=true";
-static const char *fonts[] = {
-  "NotoColorEmoji:pixelsize=22:antialias=true:autohint=true",
-  "FontAwesome5Free:pixelsize=22:antialias=true:autohint=true",
-  "FontAwesome5FreeSolid:pixelsize=22:antialias=true:autohint=true",
-  "FontAwesome5Brands:pixelsize=22:antialias=true:autohint=true"
-};
 static int borderpx = 2;
 
 /*
@@ -98,45 +92,55 @@ char *termname = "st-256color";
  *	stty tabs
  */
 unsigned int tabspaces = 8;
-/* TEEMA alku */
 
-/* Terminal colors (16 first used in escape sequence) */
+#include "./colors-wal-st.h"
+
+/* bg opacity */
+float alpha = 0.8;
+
+/*
+ Terminal colors (16 first used in escape sequence) 
 static const char *colorname[] = {
+	 8 normal colors 
+	"black",
+	"red3",
+	"green3",
+	"yellow3",
+	"blue2",
+	"magenta3",
+	"cyan3",
+	"gray90",
 
-  /* 8 normal colors */
-  [0] = "#282a2e", /* black   */
-  [1] = "#904718", /* red     */
-  [2] = "#2b821d", /* green   */
-  [3] = "#a2a320", /* yellow  */
-  [4] = "#23409d", /* blue    */
-  [5] = "#8f1e8e", /* magenta */
-  [6] = "#1d8b8d", /* cyan    */
-  [7] = "#8f9296", /* white   */
+	 8 bright colors 
+	"gray50",
+	"red",
+	"green",
+	"yellow",
+	"#5c5cff",
+	"magenta",
+	"cyan",
+	"white",
 
-  /* 8 bright colors */
-  [8]  = "#373b41", /* black   */
-  [9]  = "#c36326", /* red     */
-  [10] = "#3cb528", /* green   */
-  [11] = "#d4d52a", /* yellow  */
-  [12] = "#2d52c8", /* blue    */
-  [13] = "#c72ac6", /* magenta */
-  [14] = "#2ac9cc", /* cyan    */
-  [15] = "#c5c8c6", /* white   */
+	[255] = 0,
 
-  /* special colors */
-  [256] = "#121318", /* background */
-  [257] = "#ddd5cf", /* foreground */
+	 more colors can be added after 255 to use with DefaultXX 
+	"#cccccc",
+	"#555555",
+	"gray90",  default foreground colour 
+	"black",  default background colour 
 };
 
-/* TEEMA loppu */
-/*
- * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
- */
-unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-unsigned int defaultcs = 257;
-static unsigned int defaultrcs = 256;
+
+
+   Default colors (colorname index)
+   foreground, background, cursor, reverse cursor
+ 
+unsigned int defaultfg = 258;
+unsigned int defaultbg = 259;
+unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
+*/
+
 
 /*
  * Default shape of cursor
@@ -197,8 +201,8 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ ControlMask,              XK_plus,       zoom,           {.f = +1} },
-	{ ControlMask,              XK_minus,        zoom,           {.f = -1} },
+	{ ControlMask,          XK_plus,        zoom,           {.f = +1} },
+	{ ControlMask,          XK_minus,       zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
