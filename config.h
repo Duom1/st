@@ -94,7 +94,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.94;
+float alpha = 0.90;
 
 #include "/home/user/.cache/wal/colors-wal-st.h"
 
